@@ -1,0 +1,27 @@
+# Keybindings require three things to be fully defined: A selector that is
+# matched against the focused element, the keystroke and the command to
+# execute.
+#
+# Below is a basic keybinding which registers on all platforms by applying to
+# the root workspace element.
+
+# For more detailed documentation see
+# https://atom.io/docs/latest/advanced/keymaps
+'.platform-darwin atom-workspace atom-text-editor:not(.mini)[data-grammar~="todo"]':
+  'cmd-enter': 'atomdo:convert-to-task'
+  'cmd-d': 'atomdo:complete'
+  'cmd-g': 'atomdo:go'
+  'cmd-shift-a': 'atomdo:archive'
+  'ctrl-c': 'atomdo:cancel'
+  'cmd-shift-t': 'atomdo:datetime'
+  'alt-up': 'atomdo:reorder-up'
+  'alt-down': 'atomdo:reorder-down'
+
+# TODO: fix below accordingly
+'.platform-win32 atom-workspace atom-text-editor:not(.mini)[data-grammar~="todo"], .platform-linux atom-workspace atom-text-editor:not(.mini)[data-grammar~="todo"]':
+  'ctrl-enter': 'atomdo:add'
+  'ctrl-shift-enter': 'atomdo:add-above'
+  'ctrl-d': 'atomdo:complete'
+  'ctrl-g': 'atomdo:go'
+  'ctrl-shift-a': 'atomdo:archive'
+  'alt-c': 'atomdo:cancel'

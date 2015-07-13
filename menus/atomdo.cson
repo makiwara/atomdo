@@ -1,0 +1,21 @@
+'context-menu':
+  'atom-text-editor[data-grammar~="todo"]': [
+    {'type': 'separator'}
+    {
+      'label': 'Complete Task',
+      'command': 'tasks:complete'
+    }
+    {
+      'label': 'Cancel Task',
+      'command': 'tasks:cancel'
+    }
+    {
+      'label': 'Archive Tasks',
+      'command': 'tasks:archive'
+    }
+    {
+      'label': 'Convert to Task',
+      'command': 'tasks:convert-to-task'
+    }
+    {'type': 'separator'}
+  ]

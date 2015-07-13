@@ -1,0 +1,119 @@
+'fileTypes': [
+  'todo'
+  'taskpaper'
+  'idea'
+  'blog'
+]
+'scopeName': 'source.todo'
+
+'name': 'AtomDo'
+'patterns': [
+
+  {
+    'match': '^([\\s]*)([^☐✔✘\\s].*):$'
+    'name': 'control.atomdo.header.${2:/downcase}'
+    'captures':
+        '2':
+            'name': 'control.atomdo.header-title'
+            'patterns': [
+              {'include': '#attribute'}
+              {'include': '#tag'}
+              {'include': '#prio'}
+              {'include': '#url'}
+            ]
+  }
+
+  {
+    'begin': '^([\\s]*)(?=.*@done)'
+    'end': '$'
+    'name': 'atomdo.text.done'
+    'patterns': [
+      {'include': '#marker'}
+      {'include': '#attribute'}
+      {'include': '#tag'}
+      {'include': '#prio'}
+      {'include': '#url'}
+    ]
+  }
+
+  {
+    'begin': '^([\\s]*)(?=.*@cancelled)'
+    'end': '$'
+    'name': 'atomdo.text.cancelled'
+    'patterns': [
+      {'include': '#marker'}
+      {'include': '#attribute'}
+      {'include': '#tag'}
+      {'include': '#prio'}
+      {'include': '#url'}
+    ]
+  }
+
+  {
+    'match': '^([\\s]*)([☐✔✘].*):$'
+    'name': 'atomdo.bigtasks'
+    'captures':
+      '2':
+        'patterns': [
+          {'include': '#marker'}
+          {'include': '#attribute'}
+          {'include': '#tag'}
+          {'include': '#prio'}
+          {'include': '#url'}
+        ]
+  }
+
+  {
+    'match': '^([\\s]*)([☐✔✘].*)$'
+    'name': 'atomdo.text'
+    'captures':
+      '2':
+        'patterns': [
+          {'include': '#marker'}
+          {'include': '#attribute'}
+          {'include': '#tag'}
+          {'include': '#prio'}
+          {'include': '#url'}
+        ]
+  }
+
+  {
+    'match': '^([\\s]+)([^☐✔✘\\s].*)$'
+    'name': 'atomdo.subtle'
+    'captures':
+      '2':
+        'patterns': [
+          {'include': '#marker'}
+          {'include': '#attribute'}
+          {'include': '#tag'}
+          {'include': '#prio'}
+          {'include': '#url'}
+        ]
+  }
+]
+
+'repository':
+  'marker':
+    'match': '(☐|✔|✘)'
+    'name': 'keyword.atomdo.marker'
+  'url':
+    'match': 'http(s?)://\\S*[^ ,!?;)\\]]'
+    'name': 'keyword.atomdo.url'
+  'attribute':
+    'match': '@([\\w?!_\\-]+)(?:\\((.*?)\\))?'
+    'name': 'atomdo.attribute.$1'
+    'captures':
+      '1': 'name': 'atomdo.attribute-name'
+      '2': 'name': 'atomdo.attribute-value'
+  'tag':
+    'match': '#([\\w?!_\\-]+)(?:\\((.*?)\\))?'
+    'name': 'atomdo.tag.$1'
+    'captures':
+      '1': 'name': 'atomdo.tag-name'
+      '2': 'name': 'atomdo.tag-value'
+  'prio':
+    'match': '\\!([\\w?!_\\-]+)(?:\\((.*?)\\))?'
+    'name': 'atomdo.prio.$1'
+    'captures':
+      '1': 'name': 'atomdo.prio-name'
+      '2': 'name': 'atomdo.prio-value'

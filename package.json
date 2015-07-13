@@ -1,0 +1,25 @@
+{
+  "name": "atomdo",
+  "main": "./lib/atomdo",
+  "version": "0.0.2",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "repository": "https://github.com/atom/atomdo",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "moment": "~2.6.0",
+    "underscore": "^1.8.3"
+  },
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    }
+  },
+  "readmeFilename": "README.md"
+}

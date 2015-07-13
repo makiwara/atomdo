@@ -1,0 +1,36 @@
+@import "ui-variables";
+
+atom-text-editor::shadow, atom-text-editor {
+  .atomdo {
+    &.header {
+        color: @text-color-warning;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 18px;
+    }
+    &.marker { color: @text-color-subtle; }
+    &.attribute { color: @text-color-info; }
+    &.tag { color: @text-color-success; }
+    &.prio { color: @text-color-error; }
+
+    &.bigtasks { font-weight: bold }
+    &.subtle { color: @text-color-subtle; }
+    &.url { color: @text-color-info; }
+
+    &.done,
+    &.cancelled {
+      &.text { color: @text-color-subtle; }
+      .marker { color: @text-color-success; }
+      .attribute {
+        color: mix(@text-color-info, @text-color-subtle, 30%);
+      }
+      .tag {
+        color: mix(@text-color-success, @text-color-subtle, 30%);
+      }
+      .prio {
+        color: mix(@text-color-error, @text-color-subtle, 30%);
+      }
+    }
+    &.cancelled .marker { color: @text-color-error; }
+  }
+}

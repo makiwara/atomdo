@@ -1,0 +1,22 @@
+Visuals:
+✔ Big font for sections @done(2015-07-13 14:43)
+☐ Super tasks ending with :
+✔ !BUG Cmd+Enter ставить маркер после всех пробелов @done(2015-07-13 14:52)
+☐ @attributes(with parameter)
+☐ #tags(same)
+☐ !priorities
+☐ Cmd+G opens link:
+    ☐ http/https
+    ☐ @pmaas
+    ☐ CASINT-982 jira shortcuts
+☐ Cmd+Shift+T inserts current timestamp 2015-07-13 14:46
+☐ Subtle text with additional information on tasks
+    More details, urls, whatever is useful.
+
+Ongoing:
+☐ reoder list with Alt+Up/Down
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+Archive:
+✔ Archive: with contents @done(2015-07-13 14:35)
