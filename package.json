@@ -1,19 +1,19 @@
 {
-  "name": "AtomDo",
+  "name": "atomdo",
   "main": "./lib/atomdo",
   "version": "0.0.0",
   "description": "Atomic Todo/Wiki/Blog helper",
   "keywords": [
-      "gtd"
-      "todo"
-      "tasks"
-      "organiser"
+      "gtd",
+      "todo",
+      "tasks",
+      "organiser",
       "wiki"
   ],
   "repository": "https://github.com/makiwara/atomdo",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">=0.50.0"
   },
   "dependencies": {
     "moment": "~2.6.0",
