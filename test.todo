@@ -1,6 +1,13 @@
+Horizon:
+☐ reorder lines with Alt
+☐ !BUG Convert to task: remove trailing whitespace after cursos
+☐ !BUG Convert to task: if not whitespace, insert ☐ from left
+☐ bold in complete tasks
+
+
 Visuals:
 ✔ Big font for sections @done(2015-07-13 14:43)
-☐ Super tasks ending with :
+☐ Super tasks ending with:
 ✔ !BUG Cmd+Enter ставить маркер после всех пробелов @done(2015-07-13 14:52)
 ☐ @attributes(with parameter)
 ☐ #tags(same)

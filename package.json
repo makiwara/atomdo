@@ -1,11 +1,16 @@
 {
-  "name": "atomdo",
+  "name": "AtomDo",
   "main": "./lib/atomdo",
-  "version": "0.0.2",
-  "description": "A short description of your package",
+  "version": "0.0.0",
+  "description": "Atomic Todo/Wiki/Blog helper",
   "keywords": [
+      "gtd"
+      "todo"
+      "tasks"
+      "organiser"
+      "wiki"
   ],
-  "repository": "https://github.com/atom/atomdo",
+  "repository": "https://github.com/makiwara/atomdo",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
