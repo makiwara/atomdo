@@ -34,7 +34,7 @@ module.exports =
     priorityMarker:
       type: 'string', default: '!'
     attributeUrlPrefix:
-      type: 'string', default: 'http://myhub.corp.ebay.com/Person.aspx?accountname=corp%5C'
+      type: 'string', default: 'https://hub.corp.ebay.com/profile/'
     jiraUrlPrefix:
       type: 'string', default: 'https://jira.corp.ebay.com/browse/'
 
