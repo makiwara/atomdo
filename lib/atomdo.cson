@@ -10,16 +10,13 @@
 'patterns': [
 
   {
-    'match': '^([\\s]*)([^☐✔✘\\s].*):$'
-    'name': 'control.atomdo.header.${2:/downcase}'
+    'match': '^([^☐✔✘\\s].*):$'
+    'name': 'control.atomdo.header.${1:/downcase}'
     'captures':
-        '2':
+        '1':
             'name': 'control.atomdo.header-title'
             'patterns': [
-              {'include': '#attribute'}
-              {'include': '#tag'}
-              {'include': '#prio'}
-              {'include': '#url'}
+                {'include': '#boldtask'}
             ]
   }
 
@@ -28,11 +25,8 @@
     'end': '$'
     'name': 'atomdo.text.done'
     'patterns': [
-      {'include': '#marker'}
-      {'include': '#attribute'}
-      {'include': '#tag'}
-      {'include': '#prio'}
-      {'include': '#url'}
+          {'include': '#boldtask'}
+          {'include': '#enhancements'}
     ]
   }
 
@@ -41,27 +35,11 @@
     'end': '$'
     'name': 'atomdo.text.cancelled'
     'patterns': [
-      {'include': '#marker'}
-      {'include': '#attribute'}
-      {'include': '#tag'}
-      {'include': '#prio'}
-      {'include': '#url'}
+          {'include': '#boldtask'}
+          {'include': '#enhancements'}
     ]
   }
 
-  {
-    'match': '^([\\s]*)([☐✔✘].*):$'
-    'name': 'atomdo.bigtasks'
-    'captures':
-      '2':
-        'patterns': [
-          {'include': '#marker'}
-          {'include': '#attribute'}
-          {'include': '#tag'}
-          {'include': '#prio'}
-          {'include': '#url'}
-        ]
-  }
 
   {
     'match': '^([\\s]*)([☐✔✘].*)$'
@@ -69,11 +47,8 @@
     'captures':
       '2':
         'patterns': [
-          {'include': '#marker'}
-          {'include': '#attribute'}
-          {'include': '#tag'}
-          {'include': '#prio'}
-          {'include': '#url'}
+          {'include': '#boldtask'}
+          {'include': '#enhancements'}
         ]
   }
 
@@ -83,16 +58,46 @@
     'captures':
       '2':
         'patterns': [
-          {'include': '#marker'}
-          {'include': '#attribute'}
-          {'include': '#tag'}
-          {'include': '#prio'}
-          {'include': '#url'}
+          {'include': '#boldtask'}
+          {'include': '#enhancements'}
+        ]
+  }
+
+  {
+    'match': '^(.*)$'
+    'name': 'atomdo.text'
+    'captures':
+      '1':
+        'patterns': [
+          {'include': '#enhancements'}
         ]
   }
 ]
 
 'repository':
+  'boldtask':
+    'match': '(.*:(\\s*@([\\w?!_\\-]+)(?:\\((.*?)\\))?)*)$'
+    'name':  'atomdo.boldtask'
+    'captures':
+        '1':
+            'patterns': [
+              {'include': '#marker'}
+              {'include': '#attribute'}
+              {'include': '#tag'}
+              {'include': '#prio'}
+              {'include': '#url'}
+            ]
+  'enhancements':
+    'match': '(.*)'
+    'captures':
+        '1':
+            'patterns': [
+              {'include': '#marker'}
+              {'include': '#attribute'}
+              {'include': '#tag'}
+              {'include': '#prio'}
+              {'include': '#url'}
+            ]
   'marker':
     'match': '(☐|✔|✘)'
     'name': 'keyword.atomdo.marker'

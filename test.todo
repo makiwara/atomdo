@@ -1,11 +1,12 @@
-Horizon:
-☐ reorder lines with Alt
 ☐ !BUG Convert to task: remove trailing whitespace after cursos
 ☐ !BUG Convert to task: if not whitespace, insert ☐ from left
-☐ bold in complete tasks
+☐ @due: when @due(timestamp) comes, pop up to top of file and make !due(timespamp)
+☐ @due: iterate @due(HH:MM) and @due(weekday)
+☐ project-wide autocomplete for @attr, #tag, !prio
+☐ reorder lines with Alt+Up/Down
 
 
-Visuals:
+Visual guideline:
 ✔ Big font for sections @done(2015-07-13 14:43)
 ☐ Super tasks ending with:
 ✔ !BUG Cmd+Enter ставить маркер после всех пробелов @done(2015-07-13 14:52)
@@ -20,10 +21,12 @@ Visuals:
 ☐ Subtle text with additional information on tasks
     More details, urls, whatever is useful.
 
-Ongoing:
-☐ reoder list with Alt+Up/Down
+Also usual text can also contain links http://google.com and #tags and !prios.
 
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
 ✔ Archive: with contents @done(2015-07-13 14:35)
+✔ bold in complete tasks: @done(2015-07-26 00:00)
+✔ markup in regular lines @done(2015-07-26 00:04)
+✔ refactor markup CSON  @done(2015-07-26 00:04)
