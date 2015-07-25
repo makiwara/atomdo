@@ -1,9 +1,8 @@
-☐ !BUG Convert to task: remove trailing whitespace after cursos
-☐ !BUG Convert to task: if not whitespace, insert ☐ from left
 ☐ @due: when @due(timestamp) comes, pop up to top of file and make !due(timespamp)
 ☐ @due: iterate @due(HH:MM) and @due(weekday)
 ☐ project-wide autocomplete for @attr, #tag, !prio
 ☐ reorder lines with Alt+Up/Down
+
 
 
 Visual guideline:
@@ -30,3 +29,5 @@ Archive:
 ✔ bold in complete tasks: @done(2015-07-26 00:00)
 ✔ markup in regular lines @done(2015-07-26 00:04)
 ✔ refactor markup CSON  @done(2015-07-26 00:04)
+✔ !BUG Convert to task: remove trailing whitespace after cursos @done(2015-07-26 01:04)
+✔ !BUG Convert to task: if not whitespace, insert ☐ from left @done(2015-07-26 00:42)

@@ -241,7 +241,7 @@ module.exports =
 
     else
       # need to insert the marker
-      if checkLine.firstNonWhitespaceIndex # after whitespace
+      if not checkLine.text.match(/^\s+$/) and checkLine.firstNonWhitespaceIndex > -1 # after whitespace
           pt = new Point lineNumber, checkLine.firstNonWhitespaceIndex
       else # or just in the beginning of line
           pt = new Point lineNumber, checkLine.text.length
