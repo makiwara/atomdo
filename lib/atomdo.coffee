@@ -162,7 +162,37 @@ module.exports =
    * Helper for to reordering with Alt+Up/Down
   ###
   reorderTask: (dir = 1) ->
-      # TODO write reordering
+      editor = atom.workspace.getActiveTextEditor()
+      return if not editor
+      selection = editor.getSelectedBufferRanges()
+
+      editor.transact ->
+
+          # find rows to shift
+          currentTask = []
+          tasks.getAllSelectionRows(selection).map (row)->
+              el =
+                  row: row
+                  line: editor.displayBuffer.tokenizedBuffer.tokenizedLines[row]
+              currentTask.push el
+          # start from the first row shifting in given direction
+          currentTask.sort (a,b)->
+              return dir*(b.row-a.row)
+          currentTask.map (el)->
+              # find next/prev row
+              rowToMove = el.row + dir
+              lineToMove = editor.displayBuffer.tokenizedBuffer.tokenizedLines[rowToMove]
+              insertRow = el.row
+              deleteRow = rowToMove
+              if dir < 0
+                  insertRow += 1
+              else
+                  deleteRow += 1
+              # copy row
+              insertPoint = new Point insertRow, 0
+              editor.buffer.insert insertPoint, lineToMove.text + '\n'
+              # remove row
+              editor.buffer.deleteRow deleteRow
 
   ###*
    * Helper for completing a task

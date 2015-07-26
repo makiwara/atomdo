@@ -1,9 +1,8 @@
 ☐ @due: when @due(timestamp) comes, pop up to top of file and make !due(timespamp)
 ☐ @due: iterate @due(HH:MM) and @due(weekday)
 ☐ project-wide autocomplete for @attr, #tag, !prio
-☐ reorder lines with Alt+Up/Down
-
-
+✔ reorder lines with Alt+Up/Down @done(2015-07-26 13:09)
+☐ !BUG do not claim line after multiline selection in tasks.getAllSelectionRows(selection)
 
 Visual guideline:
 ✔ Big font for sections @done(2015-07-13 14:43)
