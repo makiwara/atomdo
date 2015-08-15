@@ -33,3 +33,4 @@ Archive:
 ✔ http://www.smartweb.dk) <- !BUG @done(2015-08-15 17:20)
 ✔ lines starting with 'url' become blue @done(2015-08-15 17:12)
 ✔ !BUG still have no #tag, @attr, !prio @done(2015-08-15 17:13)
+✔ highlight Jira tickets @done(2015-08-15 17:23)

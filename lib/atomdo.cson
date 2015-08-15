@@ -98,12 +98,16 @@
               {'include': '#tag'}
               {'include': '#prio'}
               {'include': '#url'}
+              {'include': '#jira'}
             ]
   'marker':
     'match': '(☐|✔|✘)'
     'name': 'keyword.atomdo.marker'
   'url':
     'match': 'http(s?)://\\S+[^ ,.!?);]+'
+    'name': 'keyword.atomdo.url'
+  'jira':
+    'match': '[A-Z]{3,}-[0-9]{2,}'
     'name': 'keyword.atomdo.url'
   'attribute':
     'match': '@([\\w?!_\\-]+)(?:\\((.*?)\\))?'
