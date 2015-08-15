@@ -11,12 +11,13 @@
 
   {
     'match': '^([^☐✔✘\\s].*):$'
-    'name': 'control.atomdo.header.${1:/downcase}'
+    'name': 'control.atomdo.header.title-${1:/downcase}'
     'captures':
         '1':
             'name': 'control.atomdo.header-title'
             'patterns': [
                 {'include': '#boldtask'}
+                {'include': '#enhancements'}
             ]
   }
 
@@ -88,7 +89,7 @@
               {'include': '#url'}
             ]
   'enhancements':
-    'match': '(.*)'
+    'match': '^(.*)$'
     'captures':
         '1':
             'patterns': [
@@ -102,7 +103,7 @@
     'match': '(☐|✔|✘)'
     'name': 'keyword.atomdo.marker'
   'url':
-    'match': 'http(s?)://\\S*[^ ,!?;)\\]]'
+    'match': 'http(s?)://\\S+[^ ,.!?);]+'
     'name': 'keyword.atomdo.url'
   'attribute':
     'match': '@([\\w?!_\\-]+)(?:\\((.*?)\\))?'

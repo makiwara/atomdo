@@ -9,7 +9,7 @@ module.exports =
   markerSelector: 'keyword.atomdo.marker'
   doneSelector: 'atomdo.text.done'
   cancelledSelector: 'atomdo.text.cancelled'
-  archiveSelector: 'control.atomdo.header.archive'
+  archiveSelector: 'control.atomdo.header.title-archive'
   headerSelector: 'control.atomdo.header-title'
 
 
