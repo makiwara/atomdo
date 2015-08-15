@@ -1,4 +1,3 @@
-☐ @due: when @due(timestamp) comes, pop up to top of file and make !due(timespamp)
 ☐ @due: iterate @due(HH:MM) and @due(weekday)
 ☐ project-wide autocomplete for @attr, #tag, !prio
 ☐ !BUG do not claim line after multiline selection in tasks.getAllSelectionRows(selection)
@@ -17,8 +16,10 @@ Visual guideline:
 ☐ Cmd+Shift+T inserts current timestamp 2015-07-13 14:46
 ☐ Subtle text with additional information on tasks
     More details, urls, whatever is useful.
+☐ @due(YYYY-MM-DD HH:MM), @due(YYYY-MM-DD), @due(HH:MM), @due(weekday) — when due time comes, lines pop up to the top
 
 Also usual text can also contain links http://google.com and #tags and !prios.
+
 
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
@@ -34,3 +35,4 @@ Archive:
 ✔ lines starting with 'url' become blue @done(2015-08-15 17:12)
 ✔ !BUG still have no #tag, @attr, !prio @done(2015-08-15 17:13)
 ✔ highlight Jira tickets @done(2015-08-15 17:23)
+✔ @due: when @due(timestamp) comes, pop up to top of file and make @due(timespamp) @done(2015-08-15 20:55)

@@ -1,4 +1,4 @@
-{Point, Range} = require 'atom'
+{Point, Range, Task} = require 'atom'
 _ = require 'underscore'
 moment = require 'moment'
 CSON = require atom.config.resourcePath + "/node_modules/season/lib/cson.js"
@@ -10,6 +10,7 @@ shell = require 'shell'
 
 # Store the current settings for the markers
 marker = completeMarker = cancelledMarker = archiveSeparator = attributeMarker = tagMarker = priorityMarker = ''
+
 
 module.exports =
 
@@ -37,6 +38,8 @@ module.exports =
       type: 'string', default: 'https://hub.corp.ebay.com/profile/'
     jiraUrlPrefix:
       type: 'string', default: 'https://jira.corp.ebay.com/browse/'
+    weekRegexpCommaSeparated:
+      type: 'string', default: ['sunday|воскресенье|вс', 'monday|понедельник|пн', 'tuesday|вторник|вт', 'wednesday|среда|ср', 'thursday|четверг|чт', 'friday|пятница|пт', 'saturday|суббота|сб'].join(',')
 
 
 
@@ -87,6 +90,63 @@ module.exports =
       "atomdo:reorder-up":   => @reorderTask(-1)
       "atomdo:reorder-down": => @reorderTask(+1)
 
+    # Starts up due updates
+    setInterval @updateDues, 60000
+
+  ###*
+   * Find and update dues(): convert to !due, move upfront
+   * TODO move !due(day) and !due(hh:mm) upfront from archive
+  ###
+  updateDues: ->
+      week = _.map atom.config.get('atomdo.weekRegexpCommaSeparated').split(","), (re) -> new RegExp('^'+re+'$', 'ig')
+      today = new Date()
+      todayWeekDay = week[today.getDay()]
+      todayDate = today.toISOString().replace('T',' ')
+      todayHM   = todayDate.replace(/^[0-9]{4}-[0-9]{2}-[0-9]{2} ([0-9]{3}:[0-9]{2}).*$/, '$1')
+
+      alarmsData = {}
+      atom.workspace.scan /@due\(.*?\)/ig, {}, (result, error) ->
+          alarms = {}
+          isAlarmed = false
+          # find all lines to bring upfront
+          # TODO recurring !due from Archive
+          _.each result.matches, (match) ->
+              alarm = (/@due\((.*?)\)/ig).exec(match.matchText)[1].match(todayWeekDay)
+              if not alarm
+                  m = (/@due\(([0-9]{4}.*?)\)/ig).exec(match.matchText)
+                  if m
+                      alarm = m[1] < todayDate
+              if not alarm
+                  m = (/@due\(([0-9]{2}\:[0-9]{2})\)/ig).exec(match.matchText)
+                  if m
+                      alarm = m[1] < todayHM
+              if not alarm
+                  m = (/@due\(([0-9]{1}\:[0-9]{2})\)/ig).exec(match.matchText)
+                  if m
+                      alarm = '0'+m[1] < todayHM
+              if alarm
+                  if match.range.start
+                      row = match.range.start.row
+                  else
+                      row = match.range[0][0]
+                  if not alarmsData[result.filePath]
+                      alarmsData[result.filePath] = {}
+                  if not alarmsData[result.filePath][row]
+                      alarmsData[result.filePath][row] =
+                          'row': row
+                          'text': match.lineText + '\n'
+                  alarmsData[result.filePath][row].text = alarmsData[result.filePath][row].text.replace(match.matchText, '!'+match.matchText.substr(1))
+      # replace all @dues in given files
+      _.each alarmsData, (filePath, alarms) ->
+          editorPromise = atom.workspace.open filePath,
+              activatePane: false
+          editorPromise.then (editor) ->
+              insertPoint = new Point 0, 0
+              rows = []
+              rows = _.sortBy alarms, 'row'
+              _.each rows, (row) ->
+                  editor.buffer.deleteRow row.row
+                  editor.buffer.insert insertPoint, row.text
   ###*
    * Inserts time stamp under cursor
   ###
