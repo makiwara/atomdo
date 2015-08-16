@@ -35,4 +35,4 @@ Archive:
 ✔ lines starting with 'url' become blue @done(2015-08-15 17:12)
 ✔ !BUG still have no #tag, @attr, !prio @done(2015-08-15 17:13)
 ✔ highlight Jira tickets @done(2015-08-15 17:23)
-✔ @due: when @due(timestamp) comes, pop up to top of file and make @due(timespamp) @done(2015-08-15 20:55)
+✔ @due: when @due(timestamp) comes, pop up to top of file and make @due(timestamp) @done(2015-08-15 20:55)

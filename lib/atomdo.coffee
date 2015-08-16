@@ -40,6 +40,8 @@ module.exports =
       type: 'string', default: 'https://jira.corp.ebay.com/browse/'
     weekRegexpCommaSeparated:
       type: 'string', default: ['sunday|воскресенье|вс', 'monday|понедельник|пн', 'tuesday|вторник|вт', 'wednesday|среда|ср', 'thursday|четверг|чт', 'friday|пятница|пт', 'saturday|суббота|сб'].join(',')
+    minutesBeforeDue:
+      type: 'string', default: '15'
 
 
 
@@ -91,23 +93,28 @@ module.exports =
       "atomdo:reorder-down": => @reorderTask(+1)
 
     # Starts up due updates
-    setInterval @updateDues, 60000
+    # TODO in a separate process
+    setInterval @updateDues, 5*60*1000
 
   ###*
    * Find and update dues(): convert to !due, move upfront
    * TODO move !due(day) and !due(hh:mm) upfront from archive
   ###
   updateDues: ->
+      pad = (num) ->
+          if num < 10
+              val = '0'
+          else
+              val = ''
+          return val+num
       week = _.map atom.config.get('atomdo.weekRegexpCommaSeparated').split(","), (re) -> new RegExp('^'+re+'$', 'ig')
       today = new Date()
+      today.setMinutes( today.getMinutes() + parseInt(atom.config.get('atomdo.minutesBeforeDue'), 10))
       todayWeekDay = week[today.getDay()]
-      todayDate = today.toISOString().replace('T',' ')
-      todayHM   = todayDate.replace(/^[0-9]{4}-[0-9]{2}-[0-9]{2} ([0-9]{3}:[0-9]{2}).*$/, '$1')
-
+      todayHM   = pad(today.getHours()) + ':' + pad(today.getMinutes())
+      todayDate = today.getFullYear() + '-' + pad(today.getMonth()+1) + '-'+ pad(today.getDate()) + ' ' + todayHM
       alarmsData = {}
-      atom.workspace.scan /@due\(.*?\)/ig, {}, (result, error) ->
-          alarms = {}
-          isAlarmed = false
+      scanPromise = atom.workspace.scan /@due\(.*?\)/ig, {}, (result, error) ->
           # find all lines to bring upfront
           # TODO recurring !due from Archive
           _.each result.matches, (match) ->
@@ -137,16 +144,27 @@ module.exports =
                           'text': match.lineText + '\n'
                   alarmsData[result.filePath][row].text = alarmsData[result.filePath][row].text.replace(match.matchText, '!'+match.matchText.substr(1))
       # replace all @dues in given files
-      _.each alarmsData, (filePath, alarms) ->
-          editorPromise = atom.workspace.open filePath,
-              activatePane: false
-          editorPromise.then (editor) ->
-              insertPoint = new Point 0, 0
-              rows = []
-              rows = _.sortBy alarms, 'row'
-              _.each rows, (row) ->
-                  editor.buffer.deleteRow row.row
-                  editor.buffer.insert insertPoint, row.text
+      scanPromise.then ->
+          if _.size alarmsData
+              promises = []
+              activePaneItem = atom.workspace.getActivePaneItem()
+              _.each alarmsData, (alarms, filePath) ->
+                  editorPromise = atom.workspace.open filePath,
+                      activatePane: false
+                  promises.push editorPromise
+                  editorPromise.then (editor) ->
+                      editor.transact ->
+                          insertPoint = new Point 0, 0
+                          rows = _.sortBy alarms, 'row'
+                          _.each rows, (row) ->
+                              editor.buffer.deleteRow row.row
+                              editor.buffer.insert insertPoint, row.text
+              if activePaneItem
+                  all = Promise.all promises
+                  all.then ->
+                      pane = atom.workspace.paneForItem(activePaneItem)
+                      pane.activate()
+                      pane.activateItem(activePaneItem)
   ###*
    * Inserts time stamp under cursor
   ###
