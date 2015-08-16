@@ -26,6 +26,7 @@
     'end': '$'
     'name': 'atomdo.text.done'
     'patterns': [
+          {'include': '#marker'}
           {'include': '#boldtask'}
           {'include': '#enhancements'}
     ]
@@ -36,6 +37,7 @@
     'end': '$'
     'name': 'atomdo.text.cancelled'
     'patterns': [
+          {'include': '#marker'}
           {'include': '#boldtask'}
           {'include': '#enhancements'}
     ]
@@ -48,6 +50,7 @@
     'captures':
       '2':
         'patterns': [
+          {'include': '#marker'}
           {'include': '#boldtask'}
           {'include': '#enhancements'}
         ]
@@ -82,18 +85,16 @@
     'captures':
         '1':
             'patterns': [
-              {'include': '#marker'}
               {'include': '#attribute'}
               {'include': '#tag'}
               {'include': '#prio'}
               {'include': '#url'}
             ]
   'enhancements':
-    'match': '^(.+)$'
+    'match': '(.+)$'
     'captures':
         '1':
             'patterns': [
-              {'include': '#marker'}
               {'include': '#attribute'}
               {'include': '#tag'}
               {'include': '#prio'}
