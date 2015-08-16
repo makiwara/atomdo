@@ -1,7 +1,7 @@
 {
   "name": "atomdo",
   "main": "./lib/atomdo",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Atomic Todo/Wiki/Blog helper",
   "keywords": [
     "gtd",
