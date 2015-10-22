@@ -6,6 +6,9 @@ Visual guideline:
 ✔ Big font for sections @done(2015-07-13 14:43)
 ☐ Super tasks ending with:
 ✔ !BUG Cmd+Enter ставить маркер после всех пробелов @done(2015-07-13 14:52)
+☐ !!! some not very good
+    ☐ :( sad face
+    ☐ :) smiley face
 ☐ @attributes(with parameter)
 ☐ #tags(same)
 ☐ !priorities

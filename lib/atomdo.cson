@@ -95,12 +95,20 @@
     'captures':
         '1':
             'patterns': [
+              {'include': '#emotions-sad'}
+              {'include': '#emotions-happy'}
               {'include': '#attribute'}
               {'include': '#tag'}
               {'include': '#prio'}
               {'include': '#url'}
               {'include': '#jira'}
             ]
+  'emotions-sad':
+    'name': 'keyword.atomdo.emotions-sad'
+    'match': '(.*(\!{3,}|:\\().*)$'
+  'emotions-happy':
+    'name': 'keyword.atomdo.emotions-happy'
+    'match': '(.*(:\\)).*)$'
   'marker':
     'match': '(☐|✔|✘)'
     'name': 'keyword.atomdo.marker'
