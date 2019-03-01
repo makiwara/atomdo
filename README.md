@@ -1,3 +1,5 @@
+# RETIRED, NOT SUPPORTED FURTHER.
+
 # Atom DO
 
 AtomDo is a small yet powerful package to help me with organizing myself in a complex environment.
